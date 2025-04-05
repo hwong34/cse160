@@ -28,6 +28,8 @@ function handleDrawEvent() {
     // Get the rendering context for 2DCG                          <- (2)
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0,0,400,400);
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     var x = parseFloat(document.getElementById("xInput").value);
     var y = parseFloat(document.getElementById("yInput").value);
     var v1 = new Vector3([x, y, 0]);
@@ -47,6 +49,8 @@ function handleDrawOperationEvent() {
     // Get the rendering context for 2DCG                          <- (2)
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0,0,400,400);
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     var x = parseFloat(document.getElementById("xInput").value);
     var y = parseFloat(document.getElementById("yInput").value);
     var v1 = new Vector3([x, y, 0]);
