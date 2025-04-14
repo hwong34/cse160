@@ -160,7 +160,6 @@ function drawPicture() {
     drawTriangles(vertices, color);
   }
 
-  
 }
 
 

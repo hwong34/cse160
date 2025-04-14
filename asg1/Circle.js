@@ -30,8 +30,9 @@ class Circle {
         let vec2 = [Math.cos(angle2*Math.PI/180)*d, Math.sin(angle2*Math.PI/180)*d];
         let pt1 = [centerPt[0]+vec1[0], centerPt[1]+vec1[1]];
         let pt2 = [centerPt[0]+vec2[0], centerPt[1]+vec2[1]];
-        drawTriangles([xy[0], xy[1], pt1[0], pt1[1], pt2[0], pt2[1]] );
+        drawTriangles([xy[0], xy[1], pt1[0], pt1[1], pt2[0], pt2[1]], this.color );
       }
       
     }
   }
+
