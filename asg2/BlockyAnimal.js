@@ -180,9 +180,6 @@ function tick() {
 }
 
 
-
-
-
 function click(ev) {
   
   renderScene();
@@ -247,7 +244,7 @@ function renderScene(){
   head.matrix.setTranslate(-0.75, -0.2, 0.4);
   head.matrix.scale(0.35, 0.35, 0.4);
   head.render(); // Head
-  
+  drawTriangles3D(-0.8, 0.4, 0.1);
   var ears1 = new Cube();
   ears1.color = [1.0, 0.0, 0.0, 1.0];
   ears1.matrix.translate(-0.75, 0.15, 0.4); 
@@ -259,6 +256,76 @@ function renderScene(){
   ears2.matrix.translate(-0.75, 0.15, 0.1); 
   ears2.matrix.scale(0.15, 0.15, 0.1);
   ears2.render();
+ 
+  var eye1 = new Cube();
+  eye1.color = [1.0, 1.0, 1.0, 1.0]; 
+  var eyeMatrix = new Matrix4(head.matrix);
+  eye1.matrix.set(eyeMatrix); 
+  eye1.matrix.translate(-0.15, 0.6, -0.2); 
+  eye1.matrix.scale(0.2, 0.2, 0.1); 
+  eye1.render();
+
+  var eye2 = new Cube();
+  eye2.color = [1,1,1,1];
+  eye2.matrix.set(eyeMatrix);
+  eye2.matrix.translate(-0.15, 0.6, -0.7);
+  eye2.matrix.scale(0.2, 0.2, 0.1);
+  eye2.render();
+
+  var whiskers1 = new Cube();
+  whiskers1.color = [0.5, 0.5, 0.5, 1];
+  whiskers1.matrix.set(eyeMatrix);
+  whiskers1.matrix.translate(-0.1, 0.2, -0.45);
+  whiskers1.matrix.scale(0.1, 0.1, 0.1);
+  whiskers1.render();
+
+  var whiskers2 = new Cube();
+  whiskers2.color = [0.5, 0.5, 0.5, 1];
+  whiskers2.matrix.set(eyeMatrix);
+  whiskers2.matrix.translate(-0.1, 0.35, -0.3);
+  whiskers2.matrix.rotate(-30, 1, 0, 0);
+  var whiskers = new Matrix4(whiskers2.matrix);
+  whiskers2.matrix.scale(0.05, 0.05, 0.2);
+  whiskers2.render();
+
+  var whisker3 = new Cube();
+  whisker3.color = [0.5, 0.5, 0.5, 1]; 
+  whisker3.matrix.set(eyeMatrix);
+  whisker3.matrix.translate(-0.1, 0.2, -0.53);
+  whisker3.matrix.rotate(-30, 1, 0, 0);
+  whisker3.matrix.scale(0.05, 0.05, 0.2); 
+  whisker3.render(); 
+
+  var whisker4 = new Cube();
+  whisker4.color = [0.5, 0.5, 0.5, 1]; 
+  whisker4.matrix.set(whiskers);
+  whisker4.matrix.translate(0, 0.05, -0.26);
+  whisker4.matrix.rotate(60, 1, 0, 0);
+  whisker4.matrix.scale(0.05, 0.05, 0.2); 
+  whisker4.render(); 
+
+
+  var whisker5 = new Cube();
+  whisker5.color = [0.5, 0.5, 0.5, 1]; 
+  whisker5.matrix.set(whiskers);
+  whisker5.matrix.translate(0, 0.04, -0.18);
+  whisker5.matrix.rotate(240, 1, 0, 0);
+  whisker5.matrix.scale(0.05, 0.05, 0.2); 
+  whisker5.render(); 
+
+  var whisker6 = new Cube();
+  whisker6.color = [0.5, 0.5, 0.5, 1];
+  whisker6.matrix.set(eyeMatrix);
+  whisker6.matrix.translate(-0.1, 0.25, -0.3);
+  whisker6.matrix.scale(0.15, 0.05, 0.4); 
+  whisker6.render(); 
+
+  var nose = new Cube();
+  nose.color = [1,1,1,1];
+  nose.matrix.set(eyeMatrix);
+  nose.matrix.translate(-0.1, 0.45, -0.45);
+  nose.matrix.scale(0.1, 0.1, 0.1);
+  nose.render();
 
   var upperLeg = new Cube();
   upperLeg.color = [1.0, 0.5, 0.2, 1.0]; 
