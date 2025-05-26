@@ -55,7 +55,12 @@ var FSHADER_SOURCE = `
     vec3 diffuse = vec3(gl_FragColor) * nDotL * 0.7;
     vec3 ambient = vec3(gl_FragColor) * 0.2;
     if (u_lightOn) {
-      gl_FragColor = vec4(specular+diffuse+ambient, 1.0);
+      if (u_whichTexture == -1) {
+        gl_FragColor = vec4(specular+diffuse+ambient, 1.0);
+      } else {
+        gl_FragColor = vec4(diffuse+ambient, 1.0);
+      }
+      
     } 
   }`
 
@@ -212,15 +217,15 @@ let isDragging = false;
 let lastMouseX, lastMouseY;
 let g_NormalsOn = false;
 let g_lightPos = [0, 1, 2];
-let g_lightAnimation = false;
+let g_lightAnimation = true;
 let g_lightOn = true;
 
 
 
 function addActionsForHtmlUI() {
 
-  document.getElementById('normalOn').onClick = function() {g_NormalsOn = true; renderScene();};
-  document.getElementById('normalOff').onClick = function() {g_NormalsOn = false; renderScene();};
+  document.getElementById('normalOn').onclick = function() {g_NormalsOn = true; renderScene();};
+  document.getElementById('normalOff').onclick = function() {g_NormalsOn = false; renderScene();};
   document.getElementById('lightsOn').onclick = function() {g_lightOn = true;};
   document.getElementById('lightsOff').onclick = function() {g_lightOn = false;};
   document.getElementById('lightAnimationOn').onclick = function() {g_lightAnimation = true;};
@@ -392,27 +397,6 @@ for (let x = 0; x < 15; x++) {
   }
 }
 
-let wallCubes = [];
-
-function initWorldFromMap(map) {
-  
-  for (let x = 0; x < map.length; x++) {
-    for (let z = 0; z < map[0].length; z++) {
-      for (let y = 0; y < map[x][z]; y++) {
-        let cube = new Cube();
-        cube.x = x;
-        cube.y = y;
-        cube.z = z;
-        wallCubes.push(cube);
-      }
-    }
-  }
-}
-
-initWorldFromMap(map);
-
-
-
 
 function drawCat() {
 
@@ -482,12 +466,11 @@ function drawCat() {
   tail1.textureNum = -2;
   tail1.matrix.translate(0.4, -0.1, 0.2);
   tail1.matrix.rotate(-5, 1, 0, 0);
-  const tail1Base = new Matrix4(tail1.matrix); // Save for second tail
+  const tail1Base = new Matrix4(tail1.matrix); 
   tail1.matrix.scale(0.3, 0.1, 0.1);
   tail1.matrix.translate(-0.25, 0, -0.001);
   tail1.renderFaster();
 
-  // Tail tip
 
 }
 
@@ -511,15 +494,7 @@ function renderScene(){
   gl.uniform3f(u_lightPos, g_lightPos[0], g_lightPos[1], g_lightPos[2]);
   gl.uniform3f(u_cameraPos, camera.eye.x, camera.eye.y, camera.eye.z);
   gl.uniform1i(u_lightOn, g_lightOn);
-  /*
-  var floor = new Cube();
-  floor.color = [0.0, 0.0, 1.0, 1.0];
-  floor.textureNum = 0;
-  floor.matrix.translate(0, -.78, 2);
-  floor.matrix.scale(32, 0, 32);
-  floor.matrix.translate(-0.5, 3, 0.4);
-  floor.renderFaster();
-  */
+
 
   var light = new Cube();
   light.textureNum = -2;
@@ -530,6 +505,7 @@ function renderScene(){
   light.renderFaster();
 
   var sphere1 = new Sphere();
+  sphere1.color = [0, 0, 0, 1];
   sphere1.textureNum = -1;
   sphere1.matrix.translate(-1.75, -0.1, -0.2);
   sphere1.matrix.scale(0.5, 0.5, 0.5);
@@ -539,7 +515,7 @@ function renderScene(){
   const offsetZ = -map[0].length / 2;
   
   var cube1 = new Cube();
-  cube1.textureNum = -2;
+  cube1.textureNum = -2;  //original color
   if (g_NormalsOn) {
     cube1.textureNum = -3;
   }
