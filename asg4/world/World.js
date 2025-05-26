@@ -404,6 +404,9 @@ function drawCat() {
   const body = new Cube();
   body.color = [1.0, 0.5, 0.2, 1.0];
   body.textureNum = -2;
+  if (g_NormalsOn) {
+    body.textureNum = -3;
+  }
   body.matrix.translate(-0.4, -0.3, 0.4);
   body.matrix.scale(0.8, 0.4, 0.4);
   body.renderFaster();
@@ -412,6 +415,9 @@ function drawCat() {
   const head = new Cube();
   head.color = [1.0, 0.5, 0.2, 1.0];
   head.textureNum = -2;
+  if (g_NormalsOn) {
+    head.textureNum = -3;
+  }
   head.matrix.translate(-0.75, -0.2, 0.4);
   head.matrix.scale(0.35, 0.35, 0.4);
   head.renderFaster();
@@ -420,6 +426,9 @@ function drawCat() {
   for (let offsetZ of [0.4, 0.1]) {
     const ear = new Cube();
     ear.textureNum = -2;
+    if (g_NormalsOn) {
+      ear.textureNum = -3;
+    }
     ear.color = [1.0, 0.0, 0.0, 1.0];
     ear.matrix.translate(-0.75, 0.15, offsetZ);
     ear.matrix.scale(0.15, 0.15, 0.1);
@@ -441,6 +450,9 @@ function drawCat() {
     const upper = new Cube();
     upper.color = [1.0, 0.5, 0.2, 1.0];
     upper.textureNum = -2;
+    if (g_NormalsOn) {
+      upper.textureNum = -3;
+    }
     upper.matrix.translate(lx, ly, lz);
     upper.matrix.rotate(-g_orangeAngle, 0, 0, 1);
     const jointMatrix = new Matrix4(upper.matrix); 
@@ -450,6 +462,9 @@ function drawCat() {
     // Lower leg
     const lower = new Cube();
     lower.textureNum = -2;
+    if (g_NormalsOn) {
+      lower.textureNum = -3;
+    }
     lower.color = [1.0, 0.0, 0.0, 1.0];
     lower.matrix.set(jointMatrix);
     lower.matrix.translate(0.05, -0.13, 0);
@@ -464,6 +479,9 @@ function drawCat() {
   const tail1 = new Cube();
   tail1.color = [1.0, 0.0, 0.0, 1.0];
   tail1.textureNum = -2;
+  if (g_NormalsOn) {
+    tail1.textureNum = -3;
+  }
   tail1.matrix.translate(0.4, -0.1, 0.2);
   tail1.matrix.rotate(-5, 1, 0, 0);
   const tail1Base = new Matrix4(tail1.matrix); 
@@ -507,6 +525,9 @@ function renderScene(){
   var sphere1 = new Sphere();
   sphere1.color = [0, 0, 0, 1];
   sphere1.textureNum = -1;
+  if (g_NormalsOn) {
+    sphere1.textureNum = -3;
+  }
   sphere1.matrix.translate(-1.75, -0.1, -0.2);
   sphere1.matrix.scale(0.5, 0.5, 0.5);
   sphere1.render();
